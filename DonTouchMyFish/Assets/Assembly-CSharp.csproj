@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\DragableItem.cs" />
+     <Compile Include="Assets\Scripts\GameControllers\GameManager.cs" />
+     <Compile Include="Assets\Scripts\GameControllers\LevelController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
  </Reference>
