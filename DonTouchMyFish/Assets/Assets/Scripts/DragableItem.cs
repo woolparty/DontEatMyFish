@@ -19,7 +19,7 @@ public class DragableItem : MonoBehaviour {
 	{
 		if(isDragging)
 		{
-			rigidbody.angularVelocity = Vector3.zero;
+			//rigidbody.angularVelocity = Vector3.zero;
 			//transform.localRotation = Quaternion.identity;
 		}
 
