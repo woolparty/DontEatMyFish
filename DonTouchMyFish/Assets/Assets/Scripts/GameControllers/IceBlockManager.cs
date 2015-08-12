@@ -33,6 +33,13 @@ public class IceBlockManager : MonoBehaviour
 	{
 		m_iceBlocks.Remove(i_iceblock);
 		Destroy(i_iceblock.gameObject);
+		GameManager.GetInstance().AddScore(10);
+	}
+	
+	public void Clear()
+	{
+		m_iceBlocks.Clear();
+		m_matchedBlocks.Clear();
 	}
 
     public void CheckForMatch()
@@ -69,8 +76,7 @@ public class IceBlockManager : MonoBehaviour
 
         foreach (IceBlock block in m_matchedBlocks)
         {
-            m_iceBlocks.Remove(block);
-            Destroy(block.gameObject);
+			DeleteBlock(block);
         }
 
         m_matchedBlocks.Clear();

@@ -16,9 +16,10 @@ public class GameManager : MonoBehaviour
 	GameStatus state = GameStatus.Begin;
 	public LevelController m_LevelController;
 	public UIManager m_UIManager;
+	public IceBlockManager m_IceBlockManager;
 	int score = 0;
 	public UnityEngine.UI.Text scoreText;
-	float OneRoundTime = 10.0f;
+	float OneRoundTime = 60.0f;
 
 	void Awake()
 	{
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
 		state = GameStatus.Started;
 		m_UIManager.OnGamePlay();
 		m_UIManager.SetScore(0);
-		OneRoundTime = 10.0f;
+		OneRoundTime = 60.0f;
 		m_UIManager.SetTime(OneRoundTime);
 		m_LevelController.PlayGame();
 	}
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour
 	{
 		score = 0;
 		m_LevelController.RestartLevel();
-		OneRoundTime = 10.0f;
+		OneRoundTime = 60.0f;
 		m_UIManager.SetTime(OneRoundTime);
 		m_UIManager.OnGamePlay();
 		state = GameStatus.Started;
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour
 	public void AddScore(int _score)
 	{
 		score += _score;
-		scoreText.text = "Score: " + score;
+		m_UIManager.SetScore(score);
 	}
 
 
@@ -87,5 +88,6 @@ public class GameManager : MonoBehaviour
 		state = GameStatus.End;
 		m_LevelController.OnGameOver();
 		m_UIManager.OnGameOver();
+		m_IceBlockManager.Clear();
 	}
 }

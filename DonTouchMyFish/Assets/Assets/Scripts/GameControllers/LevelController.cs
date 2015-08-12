@@ -45,7 +45,11 @@ public class LevelController : MonoBehaviour {
 	{
 		GameObject block = Instantiate(blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
 		block.transform.SetParent(IceBlocks);
-		block.GetComponent<IceBlock>().SetRandomType();
+
+		IceBlock blockScript = block.GetComponent<IceBlock>();
+		blockScript.SetRandomType();
+
+		GameManager.GetInstance().m_IceBlockManager.AddBlock(blockScript);
 	}
 
 	public void OnGameOver()
