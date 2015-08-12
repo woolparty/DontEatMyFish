@@ -20,7 +20,7 @@ public class IceBlock : MonoBehaviour {
 	public void SetRandomType()
 	{
 		int type = Random.Range(1, 4);
-		Debug.Log("Type: "+ type);
+//		Debug.Log("Type: "+ type);
 		switch(type)
 		{
 			case 1:

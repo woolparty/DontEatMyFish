@@ -15,39 +15,64 @@ public class GameManager : MonoBehaviour
 
 	GameStatus state = GameStatus.Begin;
 	public LevelController m_LevelController;
+	public UIManager m_UIManager;
 	int score = 0;
 	public UnityEngine.UI.Text scoreText;
-	public Transform blockDropPos;
-	public float dropInterval = 2.5f;
-	public float dropTime = -1;
-	public GameObject blockPrefab;
+	float OneRoundTime = 10.0f;
 
 	void Awake()
 	{
 		instance = this;
-		ResetGame();
+		StartGame();
+		//ResetGame();
+	}
+
+	void initGame()
+	{
+
 	}
 
 	public void StartGame()
 	{
+		state = GameStatus.Begin;
+		m_UIManager.OnGameStart();
+	}
+
+	public void PlayGame()
+	{
 		state = GameStatus.Started;
-		DropBlock();
-		dropTime = Time.time;
+		m_UIManager.OnGamePlay();
+		m_UIManager.SetScore(0);
+		OneRoundTime = 10.0f;
+		m_UIManager.SetTime(OneRoundTime);
+		m_LevelController.PlayGame();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (Time.time - dropTime > dropInterval)
+		if(state == GameStatus.Started)
 		{
-			DropBlock();
-			dropTime = Time.time;
+			OneRoundTime -= Time.deltaTime;
+			if(OneRoundTime < 0)
+			{
+				GameOver();
+			}
+			else
+			{
+				m_UIManager.SetTime(OneRoundTime);
+			}
 		}
 	}
 
-	public void ResetGame()
+	public void RestartGame()
 	{
 		score = 0;
+		m_LevelController.RestartLevel();
+		OneRoundTime = 10.0f;
+		m_UIManager.SetTime(OneRoundTime);
+		m_UIManager.OnGamePlay();
+		state = GameStatus.Started;
 	}
 
 	public void AddScore(int _score)
@@ -56,9 +81,11 @@ public class GameManager : MonoBehaviour
 		scoreText.text = "Score: " + score;
 	}
 
-	public void DropBlock()
+
+	public void GameOver()
 	{
-		GameObject block = Instantiate(blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
-		block.GetComponent<IceBlock>().SetRandomType();
+		state = GameStatus.End;
+		m_LevelController.OnGameOver();
+		m_UIManager.OnGameOver();
 	}
 }
