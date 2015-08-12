@@ -24,9 +24,9 @@ public class DragableItem : MonoBehaviour {
 		}
         
 
-	    Vector3 position = transform.localPosition;
-        transform.localPosition = new Vector3(position.x, position.y,0);
-		transform.localRotation = Quaternion.Euler(0,0,transform.rotation.eulerAngles.z);
+	   // Vector3 position = transform.localPosition;
+       // transform.localPosition = new Vector3(position.x, position.y,0);
+		//transform.localRotation = Quaternion.Euler(0,0,transform.rotation.eulerAngles.z);
 	}
 
 
