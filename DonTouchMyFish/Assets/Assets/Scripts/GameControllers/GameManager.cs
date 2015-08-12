@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
 	public float dropTime = -1;
 	public GameObject blockPrefab;
 
+   //CSY
+    public IceBlockManager m_IceBlockManager;
+
 	void Awake()
 	{
 		instance = this;
@@ -59,6 +62,10 @@ public class GameManager : MonoBehaviour
 	public void DropBlock()
 	{
 		GameObject block = Instantiate(blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
-		block.GetComponent<IceBlock>().SetRandomType();
+	    IceBlock blockScript = block.GetComponent<IceBlock>();
+        blockScript.SetRandomType();
+
+        //CSY
+        m_IceBlockManager.AddBlock(blockScript);
 	}
 }
