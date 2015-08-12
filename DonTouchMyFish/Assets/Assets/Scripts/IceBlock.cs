@@ -2,19 +2,21 @@
 using System.Collections;
 
 public class IceBlock : MonoBehaviour {
-	[HideInInspector]
+	//[HideInInspector]
 	public FishType foodType;
 	MeshRenderer renderer;
 	public Material[] blockMaterials;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		foodType = FishType.RedFish;
 		renderer = GetComponentInChildren<MeshRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		Vector3 pos = transform.position;
+		if( pos.x <= -7f || pos.x > 5f )
+			GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
 	}
 
 	public void SetRandomType()

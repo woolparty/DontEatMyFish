@@ -4,7 +4,8 @@ using System.Collections;
 public enum FishType{
 	RedFish,
 	GreenFish,
-	BlueFish
+	BlueFish,
+    None
 }
 
 public enum GameStatus
