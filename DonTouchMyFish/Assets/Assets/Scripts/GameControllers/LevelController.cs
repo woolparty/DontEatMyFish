@@ -3,12 +3,12 @@ using System.Collections;
 
 public class LevelController : MonoBehaviour {
 	public GameObject blockPrefab;
+	public IceBlockManager m_IceBlockManager;
 	public Transform IceBlocks;
 	public Transform blockDropPos;
 	public float dropInterval = 2.5f;
 	public float dropTime = -1;
 	bool isGamePlayed = false;
-
 	// Use this for initialization
 	void Start () {
 	
@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isGamePlayed && Time.time - dropTime > dropInterval)
+		if (isGamePlayed && Time.time - dropTime > dropInterval && m_IceBlockManager.GetBlockCount() < 11)
 		{
 			DropBlock();
 			dropTime = Time.time;

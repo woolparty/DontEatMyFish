@@ -22,6 +22,10 @@ public class IceBlockManager : MonoBehaviour
 	    }
 	}
 
+	public int GetBlockCount()
+	{
+		return m_iceBlocks.Count;
+	}
     public void AddBlock(IceBlock i_iceblock)
     {
         m_iceBlocks.Add(i_iceblock);
@@ -40,6 +44,14 @@ public class IceBlockManager : MonoBehaviour
 	{
 		m_iceBlocks.Clear();
 		m_matchedBlocks.Clear();
+	}
+
+	public void InitBlocks(int count)
+	{
+		for(int i = 0; i< count; i++)
+		{
+
+		}
 	}
 
     public void CheckForMatch()

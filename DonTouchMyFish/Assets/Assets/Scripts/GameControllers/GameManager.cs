@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 	{
 		instance = this;
 		StartGame();
+		PlayGame();
 		//ResetGame();
 	}
 
@@ -69,10 +70,11 @@ public class GameManager : MonoBehaviour
 	public void RestartGame()
 	{
 		score = 0;
-		m_LevelController.RestartLevel();
 		OneRoundTime = 60.0f;
 		m_UIManager.SetTime(OneRoundTime);
+		m_UIManager.SetScore(score);
 		m_UIManager.OnGamePlay();
+		m_LevelController.RestartLevel();
 		state = GameStatus.Started;
 	}
 
