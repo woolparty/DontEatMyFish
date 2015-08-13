@@ -5,6 +5,9 @@ public enum FishType{
 	RedFish,
 	GreenFish,
 	BlueFish,
+    RedFishBig,
+    GreenFishBig,
+    BlueFishBig,
     None
 }
 
@@ -14,3 +17,5 @@ public enum GameStatus
 	Started,
 	End
 }
+
+

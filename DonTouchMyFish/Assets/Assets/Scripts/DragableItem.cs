@@ -25,7 +25,7 @@ public class DragableItem : MonoBehaviour {
 			//transform.localRotation = Quaternion.identity;
             
 		}
-        
+        m_iceblock.CheckForDestroy();
 
 	   // Vector3 position = transform.localPosition;
        // transform.localPosition = new Vector3(position.x, position.y,0);
@@ -55,7 +55,7 @@ public class DragableItem : MonoBehaviour {
 	void OnMouseUp()
 	{
         m_isDragging = false;
-        m_iceblock.CheckForDestroy();
+
     }
     #endregion
 }

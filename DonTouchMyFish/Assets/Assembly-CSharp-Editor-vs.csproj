@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{17533FA3-357A-CEC6-ED1C-9FA92629C572}</ProjectGuid>
+	<ProjectGuid>{3FFFDFFD-9AFD-A570-AB81-38B3247584F0}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
 	<BaseDirectory>Assets</BaseDirectory>
@@ -46,35 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Effects\Cartoon FX 2\Demo\Assets\CFX2_Demo.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX 2\Scripts\CFX2_AutoRotate.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX 2\Scripts\CFX_ShurikenThreadFix.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX 2\Spawn System\CFX_SpawnSystem.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_AutodestructWhenNoChildren.cs" />
-     <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
-     <Compile Include="Assets\Scripts\DragableItem.cs" />
-     <Compile Include="Assets\Scripts\EnumCommon.cs" />
-     <Compile Include="Assets\Scripts\Fish\BlueFish.cs" />
-     <Compile Include="Assets\Scripts\Fish\Fish.cs" />
-     <Compile Include="Assets\Scripts\Fish\GreenFish.cs" />
-     <Compile Include="Assets\Scripts\Fish\RedFish.cs" />
-     <Compile Include="Assets\Scripts\GameControllers\GameManager.cs" />
-     <Compile Include="Assets\Scripts\GameControllers\IceBlockManager.cs" />
-     <Compile Include="Assets\Scripts\GameControllers\LevelController.cs" />
-     <Compile Include="Assets\Scripts\GameControllers\StartSceneManager.cs" />
-     <Compile Include="Assets\Scripts\IceBlock.cs" />
-     <Compile Include="Assets\Scripts\Monster.cs" />
-     <Compile Include="Assets\Scripts\Penguin.cs" />
-     <Compile Include="Assets\Scripts\Platform.cs" />
-     <Compile Include="Assets\Scripts\UIControllers\GameOverPanel.cs" />
-     <Compile Include="Assets\Scripts\UIControllers\InGamePanel.cs" />
-     <Compile Include="Assets\Scripts\UIControllers\StartPanel.cs" />
-     <Compile Include="Assets\Scripts\UIControllers\UIManager.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX 2\Editor\CFXEasyEditor.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX 2\Editor\CFX_SpawnSystemEditor.cs" />
      <None Include="Assets\Effects\Cartoon FX\Shaders (Mobile)\CFXM_MobileParticleAdd_Alpha8.shader" />
      <None Include="Assets\Effects\Cartoon FX 2\CartoonFX2 Releases Notes.txt" />
      <None Include="Assets\Effects\Cartoon FX 2\Shaders\CFX2 Particle Alpha Blend Add.shader" />
@@ -85,6 +58,16 @@
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{17533FA3-357A-CEC6-ED1C-9FA92629C572}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

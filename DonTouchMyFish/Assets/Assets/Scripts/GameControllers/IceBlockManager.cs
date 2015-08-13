@@ -29,7 +29,7 @@ public class IceBlockManager : MonoBehaviour
     public void AddBlock(IceBlock i_iceblock)
     {
         m_iceBlocks.Add(i_iceblock);
-		FishType type = m_iceBlocks[m_iceBlocks.Count - 1].foodType;
+		//FishType type = m_iceBlocks[m_iceBlocks.Count - 1].foodType;
         i_iceblock.transform.parent = transform;
     }
 
@@ -37,7 +37,7 @@ public class IceBlockManager : MonoBehaviour
 	{
 		m_iceBlocks.Remove(i_iceblock);
 		Destroy(i_iceblock.gameObject);
-		GameManager.GetInstance().AddScore(10);
+
 
 
         if (m_iceBlocks.Count >= 1)
@@ -65,7 +65,7 @@ public class IceBlockManager : MonoBehaviour
         {
 
 
-            if (type == m_iceBlocks[i].foodType)
+            if (type == m_iceBlocks[i].GetFishType())
             {
 
                 m_matchedBlocks.Add(m_iceBlocks[i]);
@@ -78,7 +78,7 @@ public class IceBlockManager : MonoBehaviour
                 }
 
 
-                type = m_iceBlocks[i].foodType;
+                type = m_iceBlocks[i].GetFishType();
 
                 m_matchedBlocks.Clear();
                 m_matchedBlocks.Add(m_iceBlocks[i]);
