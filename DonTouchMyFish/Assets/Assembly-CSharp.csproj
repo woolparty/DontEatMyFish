@@ -46,9 +46,42 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Effects\Cartoon FX 2\Demo\Assets\CFX2_Demo.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX 2\Scripts\CFX2_AutoRotate.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX 2\Scripts\CFX_ShurikenThreadFix.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX 2\Spawn System\CFX_SpawnSystem.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_AutodestructWhenNoChildren.cs" />
+     <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
      <Compile Include="Assets\Scripts\DragableItem.cs" />
+     <Compile Include="Assets\Scripts\EnumCommon.cs" />
+     <Compile Include="Assets\Scripts\Fish\BlueFish.cs" />
+     <Compile Include="Assets\Scripts\Fish\Fish.cs" />
+     <Compile Include="Assets\Scripts\Fish\GreenFish.cs" />
+     <Compile Include="Assets\Scripts\Fish\RedFish.cs" />
      <Compile Include="Assets\Scripts\GameControllers\GameManager.cs" />
+     <Compile Include="Assets\Scripts\GameControllers\IceBlockManager.cs" />
      <Compile Include="Assets\Scripts\GameControllers\LevelController.cs" />
+     <Compile Include="Assets\Scripts\GameControllers\StartSceneManager.cs" />
+     <Compile Include="Assets\Scripts\IceBlock.cs" />
+     <Compile Include="Assets\Scripts\Monster.cs" />
+     <Compile Include="Assets\Scripts\Penguin.cs" />
+     <Compile Include="Assets\Scripts\Platform.cs" />
+     <Compile Include="Assets\Scripts\UIControllers\GameOverPanel.cs" />
+     <Compile Include="Assets\Scripts\UIControllers\InGamePanel.cs" />
+     <Compile Include="Assets\Scripts\UIControllers\StartPanel.cs" />
+     <Compile Include="Assets\Scripts\UIControllers\UIManager.cs" />
+     <None Include="Assets\Effects\Cartoon FX\Shaders (Mobile)\CFXM_MobileParticleAdd_Alpha8.shader" />
+     <None Include="Assets\Effects\Cartoon FX 2\CartoonFX2 Releases Notes.txt" />
+     <None Include="Assets\Effects\Cartoon FX 2\Shaders\CFX2 Particle Alpha Blend Add.shader" />
+     <None Include="Assets\Effects\Cartoon FX\Demo\Assets\CFX_Demo_WaterWiggle.shader" />
+     <None Include="Assets\Effects\Cartoon FX 2\Shaders\CFX2 Particle Alpha Blend Tint.shader" />
+     <None Include="Assets\Effects\Cartoon FX 2\CartoonFX2 Readme.txt" />
+     <None Include="Assets\Effects\Cartoon FX\CartoonFX Readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
  </Reference>

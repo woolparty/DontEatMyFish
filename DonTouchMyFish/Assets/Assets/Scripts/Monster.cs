@@ -7,7 +7,7 @@ public class Monster : MonoBehaviour {
 
 	public virtual void Eat(IceBlock iceBlock)
 	{
-		if(iceBlock.foodType == foodType)
+		if(iceBlock.GetFishType() == foodType)
 		{ 
 			Debug.Log("Fucking good."); 
 			GameManager.GetInstance().AddScore(10);

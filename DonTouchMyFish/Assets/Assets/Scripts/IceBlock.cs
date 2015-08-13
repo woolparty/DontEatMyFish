@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IceBlock : MonoBehaviour {
-	
-	public FishType foodType;
+public class IceBlock : MonoBehaviour
+{
+
+    public Fish m_fish;
+    public bool m_isMatched = false;
 
     [HideInInspector]
 	public Material[] blockMaterials;
@@ -15,26 +17,32 @@ public class IceBlock : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		foodType = FishType.RedFish;
+
 		renderer = GetComponentInChildren<MeshRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
 
-	}
+    public FishType GetFishType()
+    {
+        return m_fish.m_foodType;
+    }
 
     public void CheckForDestroy()
     {
         Vector3 pos = transform.position;
         if (pos.x <= -7f || pos.x > 5f)
         {
-            GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
-            GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
+            GetEaten();
         }
     }
 
+    public void GetEaten()
+    {
+        m_fish.Effect();
+        GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
+        GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
+    }
+
+ 
 	public void SetType(FishType type)
 	{
 		foodType = type;
@@ -60,16 +68,20 @@ public class IceBlock : MonoBehaviour {
 		{
 			case 1:
 				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[0];
-				foodType = FishType.RedFish;
+                m_fish = new RedFish();
+                m_fish.Init(FishType.RedFish);
 				break;
 			case 2:
 				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[1];
-				foodType = FishType.GreenFish;
+                m_fish = new GreenFish();
+                m_fish.Init(FishType.GreenFish);
 				break;
 			case 3:
 				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[2];
-				foodType = FishType.BlueFish;
+                m_fish = new BlueFish();
+                m_fish.Init(FishType.BlueFish);
 				break;
+
 		}
 	}
 }
