@@ -49,8 +49,12 @@ public class LevelController : MonoBehaviour {
 		IceBlock blockScript = block.GetComponent<IceBlock>();
 		blockScript.SetRandomType();
 
-		GameManager.GetInstance().m_IceBlockManager.AddBlock(blockScript);
-        GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
+	    IceBlockManager iceBlockManager = GameManager.GetInstance().m_IceBlockManager;
+        iceBlockManager.AddBlock(blockScript);
+        iceBlockManager.CheckForMatch();
+        
+
+
 	}
 
 	public void OnGameOver()

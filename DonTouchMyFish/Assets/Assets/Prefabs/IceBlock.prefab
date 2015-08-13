@@ -31,7 +31,7 @@ GameObject:
   - 114: {fileID: 11426626}
   m_Layer: 0
   m_Name: IceBlock
-  m_TagString: Untagged
+  m_TagString: IceBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: cfffbceb3635bf94a93079c488742d5b, type: 2}
   - {fileID: 2100000, guid: 56c99a523b3512e4e95456174550eee8, type: 2}
   - {fileID: 2100000, guid: 0a905f91e1496da48a3a352b52bf76e7, type: 2}
+  m_isBottom: 0
 --- !u!114 &11463454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdaf5888fcb436488c4e0eb853a8c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_iceblock: {fileID: 11426626}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
