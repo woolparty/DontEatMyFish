@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
 		m_UIManager.SetScore(score);
 		m_UIManager.OnGamePlay();
 		m_LevelController.RestartLevel();
+		m_IceBlockManager.Clear();
 		state = GameStatus.Started;
 	}
 

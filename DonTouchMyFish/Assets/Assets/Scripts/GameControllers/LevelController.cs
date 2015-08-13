@@ -2,10 +2,7 @@
 using System.Collections;
 
 public class LevelController : MonoBehaviour {
-	public GameObject blockPrefab;
-	public IceBlockManager m_IceBlockManager;
-	public Transform IceBlocks;
-	public Transform blockDropPos;
+
 	public float dropInterval = 2.5f;
 	public float dropTime = -1;
 	bool isGamePlayed = false;
@@ -16,45 +13,27 @@ public class LevelController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isGamePlayed && Time.time - dropTime > dropInterval && m_IceBlockManager.GetBlockCount() < 11)
+		if (isGamePlayed && Time.time - dropTime > dropInterval && GameManager.GetInstance().m_IceBlockManager.GetBlockCount() < 11)
 		{
-			DropBlock();
+			GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
 			dropTime = Time.time;
 		}
 	}
 
 	public void PlayGame()
 	{
-		DropBlock();
+		//GameManager.GetInstance().m_IceBlockManager.InitBlocks(10, FishType.RedFish, FishType.GreenFish);
+		GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
 		dropTime = Time.time;
 		isGamePlayed = true;
 	}
 
 	public void RestartLevel()
 	{
-		for (int i = 0; i < IceBlocks.childCount; i++)
-		{
-			Destroy(IceBlocks.GetChild(i).gameObject);
-		}
-		DropBlock();
+		GameManager.GetInstance().m_IceBlockManager.Clear();
+		GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
 		dropTime = Time.time;
 		isGamePlayed = true;
-	}
-
-	public void DropBlock()
-	{
-		GameObject block = Instantiate(blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
-		block.transform.SetParent(IceBlocks);
-
-		IceBlock blockScript = block.GetComponent<IceBlock>();
-		blockScript.SetRandomType();
-
-	    IceBlockManager iceBlockManager = GameManager.GetInstance().m_IceBlockManager;
-        iceBlockManager.AddBlock(blockScript);
-        iceBlockManager.CheckForMatch();
-        
-
-
 	}
 
 	public void OnGameOver()

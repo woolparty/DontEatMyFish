@@ -39,6 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f9d8196b5f55248931ec16bd2a6a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockPrefab: {fileID: 163454, guid: 9d39452bb8fb42b4c9af58daed8b28f2, type: 2}
+  IceBlocks: {fileID: 0}
+  blockDropPos: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

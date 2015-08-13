@@ -35,6 +35,22 @@ public class IceBlock : MonoBehaviour {
         }
     }
 
+	public void SetType(FishType type)
+	{
+		foodType = type;
+		switch(type)
+		{
+			case FishType.RedFish:
+				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[0];
+				break;
+			case FishType.GreenFish:
+				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[1];
+				break;
+			case FishType.BlueFish:
+				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[2];
+				break;
+		}
+	}
 
     public void SetRandomType()
 	{
