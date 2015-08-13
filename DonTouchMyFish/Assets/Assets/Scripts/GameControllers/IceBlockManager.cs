@@ -26,6 +26,7 @@ public class IceBlockManager : MonoBehaviour
 	{
 		return m_iceBlocks.Count;
 	}
+
     public void AddBlock(IceBlock i_iceblock)
     {
         m_iceBlocks.Add(i_iceblock);
@@ -46,11 +47,18 @@ public class IceBlockManager : MonoBehaviour
 		m_matchedBlocks.Clear();
 	}
 
-	public void InitBlocks(int count)
+	public void InitBlocks(int count, FishType type1, FishType type2)
 	{
+		FishType lastBlockType;
+		FishType lastlasltBlockType;
 		for(int i = 0; i< count; i++)
 		{
-
+			float random = Random.Range(0, 0.999f);
+			if(random > 0.5f)
+			{
+				Debug.Log("InitBlocks");
+			}
+				
 		}
 	}
 
