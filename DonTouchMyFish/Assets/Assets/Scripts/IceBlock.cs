@@ -15,8 +15,11 @@ public class IceBlock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 pos = transform.position;
-		if( pos.x <= -7f || pos.x > 5f )
-			GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
+	    if (pos.x <= -7f || pos.x > 5f)
+	    {
+	        GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
+            GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
+        }
 	}
 
 	public void SetRandomType()

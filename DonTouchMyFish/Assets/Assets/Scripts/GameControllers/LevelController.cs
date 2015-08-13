@@ -50,6 +50,7 @@ public class LevelController : MonoBehaviour {
 		blockScript.SetRandomType();
 
 		GameManager.GetInstance().m_IceBlockManager.AddBlock(blockScript);
+        GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
 	}
 
 	public void OnGameOver()
