@@ -2,10 +2,17 @@
 using System.Collections;
 
 public class IceBlock : MonoBehaviour {
-	//[HideInInspector]
+	
 	public FishType foodType;
-	MeshRenderer renderer;
+
+    [HideInInspector]
 	public Material[] blockMaterials;
+
+    [HideInInspector]
+    public bool m_isBottom = false;
+
+    private MeshRenderer renderer;
+
 	// Use this for initialization
 	void Awake () {
 		foodType = FishType.RedFish;
@@ -13,16 +20,23 @@ public class IceBlock : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		Vector3 pos = transform.position;
-	    if (pos.x <= -7f || pos.x > 5f)
-	    {
-	        GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
-            GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
-        }
+	void Update ()
+    {
+
 	}
 
-	public void SetRandomType()
+    public void CheckForDestroy()
+    {
+        Vector3 pos = transform.position;
+        if (pos.x <= -7f || pos.x > 5f)
+        {
+            GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
+            GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
+        }
+    }
+
+
+    public void SetRandomType()
 	{
 		int type = Random.Range(1, 4);
 //		Debug.Log("Type: "+ type);

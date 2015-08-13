@@ -39,6 +39,10 @@ public class IceBlockManager : MonoBehaviour
 		m_iceBlocks.Remove(i_iceblock);
 		Destroy(i_iceblock.gameObject);
 		GameManager.GetInstance().AddScore(10);
+
+
+        if (m_iceBlocks.Count >= 1)
+            m_iceBlocks[0].m_isBottom = true;
 	}
 	
 	public void Clear()
@@ -100,6 +104,15 @@ public class IceBlockManager : MonoBehaviour
         }
 
         m_matchedBlocks.Clear();
+
+
+        if (m_iceBlocks.Count >= 1)
+            m_iceBlocks[0].m_isBottom = true;
+
     }
+
+
+
+    
 
 }

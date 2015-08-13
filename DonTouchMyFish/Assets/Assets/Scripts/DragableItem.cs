@@ -3,24 +3,27 @@ using System.Collections;
 
 public class DragableItem : MonoBehaviour {
 
-	private Vector3 dist;
-	private float posX;
-	private float posY;
+	private Vector3 m_dist;
+    private float m_posX;
+    private float m_posY;
 
-	private bool isDragging;
+    private bool m_isDragging;
+
+    public IceBlock m_iceblock;
 
 	void Start()
 	{
-		isDragging = false;
+        m_isDragging = false;
 	}
 
 
 	void Update()
 	{
-		if(isDragging)
+        if (m_isDragging)
 		{
 			//rigidbody.angularVelocity = Vector3.zero;
 			//transform.localRotation = Quaternion.identity;
+            
 		}
         
 
@@ -29,20 +32,20 @@ public class DragableItem : MonoBehaviour {
 		//transform.localRotation = Quaternion.Euler(0,0,transform.rotation.eulerAngles.z);
 	}
 
-
-	void OnMouseDown()
+    #region drag callbacks 
+    void OnMouseDown()
 	{
-		isDragging = true;
+        m_isDragging = true;
 
-		dist = Camera.main.WorldToScreenPoint(transform.position);
-		posX = Input.mousePosition.x - dist.x;
-		posY = Input.mousePosition.y - dist.y;
+        m_dist = Camera.main.WorldToScreenPoint(transform.position);
+        m_posX = Input.mousePosition.x - m_dist.x;
+        m_posY = Input.mousePosition.y - m_dist.y;
 
 	}
 
 	void OnMouseDrag()
 	{
-		Vector3 curPos = new Vector3(Input.mousePosition.x - posX, dist.y, dist.z);
+        Vector3 curPos = new Vector3(Input.mousePosition.x - m_posX, m_dist.y, m_dist.z);
 		Vector3 worldPos = Camera.main.ScreenToWorldPoint(curPos);
 
 	    float diff = (worldPos - transform.position).x;
@@ -51,7 +54,8 @@ public class DragableItem : MonoBehaviour {
 
 	void OnMouseUp()
 	{
-		isDragging = false;
-
-	}
+        m_isDragging = false;
+        m_iceblock.CheckForDestroy();
+    }
+    #endregion
 }
