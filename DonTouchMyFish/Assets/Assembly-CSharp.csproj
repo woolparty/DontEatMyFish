@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Monster.cs" />
      <Compile Include="Assets\Scripts\Penguin.cs" />
      <Compile Include="Assets\Scripts\Platform.cs" />
+     <Compile Include="Assets\Scripts\UIControllers\AngerBar.cs" />
      <Compile Include="Assets\Scripts\UIControllers\GameOverPanel.cs" />
      <Compile Include="Assets\Scripts\UIControllers\InGamePanel.cs" />
      <Compile Include="Assets\Scripts\UIControllers\StartPanel.cs" />
