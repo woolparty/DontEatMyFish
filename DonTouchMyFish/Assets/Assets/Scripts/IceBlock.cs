@@ -10,7 +10,7 @@ public class IceBlock : MonoBehaviour
     [HideInInspector]
 	public Material[] blockMaterials;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool m_isBottom = false;
 
     private MeshRenderer renderer;

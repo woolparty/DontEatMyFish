@@ -13,17 +13,22 @@ public class LevelController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isGamePlayed && Time.time - dropTime > dropInterval && GameManager.GetInstance().m_IceBlockManager.GetBlockCount() < 11)
+		if(isGamePlayed&&Time.time - dropTime > dropInterval)
 		{
-			GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
+			bool hasDropedInitBlocks = GameManager.GetInstance().m_IceBlockManager.DropInitBlock();
+			//bool hasDropedInitBlocks = true;
+			if (hasDropedInitBlocks  && GameManager.GetInstance().m_IceBlockManager.GetBlockCount() < 10)
+			{
+				GameManager.GetInstance().m_IceBlockManager.DropBlock();
+			}
 			dropTime = Time.time;
 		}
 	}
 
 	public void PlayGame()
 	{
-		//GameManager.GetInstance().m_IceBlockManager.InitBlocks(10, FishType.RedFish, FishType.GreenFish);
-		GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
+		GameManager.GetInstance().m_IceBlockManager.InitBlocks(10, FishType.RedFish, FishType.GreenFish);
+		//GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
 		dropTime = Time.time;
 		isGamePlayed = true;
 	}
@@ -31,9 +36,7 @@ public class LevelController : MonoBehaviour {
 	public void RestartLevel()
 	{
 		GameManager.GetInstance().m_IceBlockManager.Clear();
-		GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
-		dropTime = Time.time;
-		isGamePlayed = true;
+		PlayGame();
 	}
 
 	public void OnGameOver()

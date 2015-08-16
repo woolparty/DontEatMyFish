@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Monster : MonoBehaviour {
 
-	public FishType foodType;
+	public FishType FoodType;
+	public float AngerCount;
 
 	public virtual void Eat(IceBlock iceBlock)
 	{
-		if(iceBlock.GetFishType() == foodType)
+		if (iceBlock.GetFishType() == FoodType)
 		{ 
 			Debug.Log("Fucking good."); 
 			GameManager.GetInstance().AddScore(10);
