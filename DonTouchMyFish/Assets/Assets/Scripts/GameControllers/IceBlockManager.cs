@@ -5,7 +5,8 @@ public class IceBlockManager : MonoBehaviour
 {
 
     private List<IceBlock> m_iceBlocks;
-    private List<IceBlock> m_matchedBlocks;
+    private List<List<IceBlock>> m_matchedBlockQueue;
+    private float m_Counter;
 
     
     public  GameObject     m_blockPrefab;
@@ -19,21 +20,29 @@ public class IceBlockManager : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-
-
+	    m_Counter = -1f;
+        m_matchedBlockQueue = new List<List<IceBlock>>();
 	    m_iceBlocks = new List<IceBlock>();
-        m_matchedBlocks = new List<IceBlock>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	    if (Input.GetKeyDown(KeyCode.U))
+	void Update ()
+	{
+        if (m_iceBlocks.Count >= 1)
+            m_iceBlocks[0].m_isBottom = true;
+
+
+	    if (m_Counter < 0)
+	        return;
+
+	    m_Counter -= Time.deltaTime;
+	    if (m_Counter <= 0.0f)
 	    {
-	        CheckForMatch();
+            CombineMatchedBlock();
+
 	    }
 
-		if (m_iceBlocks.Count >= 1)
-			m_iceBlocks[0].m_isBottom = true;
+
 	}
 
 	public int GetBlockCount()
@@ -45,6 +54,8 @@ public class IceBlockManager : MonoBehaviour
     {
         m_iceBlocks.Add(i_iceblock);
         i_iceblock.transform.parent = transform;
+
+		UpdateMatchedBlocks();
     }
 
 	public void DeleteBlock(IceBlock i_iceblock)
@@ -54,12 +65,15 @@ public class IceBlockManager : MonoBehaviour
 
         if (m_iceBlocks.Count >= 1)
             m_iceBlocks[0].m_isBottom = true;
+
+
+		UpdateMatchedBlocks();
 	}
 	
 	public void Clear()
 	{
 		m_iceBlocks.Clear();
-		m_matchedBlocks.Clear();
+		//m_matchedBlocks.Clear();
 		for (int i = 0; i < transform.childCount; i++)
 		{
 			Destroy(transform.GetChild(i).gameObject);
@@ -225,57 +239,75 @@ public class IceBlockManager : MonoBehaviour
 		CheckForMatch();
 	}
 
+	public void UpdateMatchedBlocks()
+	{
+		foreach(IceBlock iceBlock in m_iceBlocks)
+		{
+			iceBlock.m_isMatched = false;
+		}
+		m_matchedBlockQueue = new List<List<IceBlock>>();
+		CheckForMatch();
+
+		m_Counter = -1.0f;
+	}
+
     public void CheckForMatch()
     {
         FishType type = FishType.None;
+        List<IceBlock> temp = new List<IceBlock>();
         for (int i = 0; i < m_iceBlocks.Count; i++)
         {
 
+			if (m_iceBlocks[i].m_isMatched)// || m_iceBlocks[i].rigidbody.velocity.magnitude > 0.5f)
+            {
+                type = FishType.None;
+            }
+
             if (type == m_iceBlocks[i].GetFishType())
             {
-                m_matchedBlocks.Add(m_iceBlocks[i]);
+                temp.Add(m_iceBlocks[i]);
             }
             else
             {
-                if (m_matchedBlocks.Count >= 3)
+                if (temp.Count >= 3)
                 {
-                    break;
+                    
+					m_matchedBlockQueue.Add(temp);
+					foreach (IceBlock block in temp)
+					{
+						block.m_isMatched = true;
+						block.Flash();
+					}
+
                 }
                 type = m_iceBlocks[i].GetFishType();
 
-                m_matchedBlocks.Clear();
-                m_matchedBlocks.Add(m_iceBlocks[i]);
+				temp = new List<IceBlock>();
+                temp.Add(m_iceBlocks[i]);
             }
         }
 
-        if (m_matchedBlocks.Count < 3)
+        if (temp.Count >= 3)
         {
-            m_matchedBlocks.Clear();
+			m_matchedBlockQueue.Add(temp);
+			foreach (IceBlock block in temp)
+			{
+				block.m_isMatched = true;
+				block.Flash();
+			}
         }
-        else
-        {
+        
 
-			CombineMatchedBlock();
-
-        }
-
-
-        // Mark for matched
-        foreach (IceBlock block in m_matchedBlocks)
-        {
-            block.m_isMatched = true;
-        }
-
-
-
-
+		if(m_matchedBlockQueue.Count > 0)
+		{
+			if(m_Counter <= 0.0f)
+				m_Counter = 2.0f;
+		}
 
     }
 
     private void PlayMatchedEffect()
     {
-        if (m_matchedBlocks.Count <= 0)
-            Debug.LogError("matched Count must be more than one to run this function!");
 
     }
 
@@ -283,40 +315,48 @@ public class IceBlockManager : MonoBehaviour
     private void CombineMatchedBlock()
     {
 
-        if( m_matchedBlocks.Count <= 0 )
-            Debug.LogError("matched Count must be more than one to run this function!");
 
-        int insertIndex = m_iceBlocks.IndexOf(m_matchedBlocks[0]);
-        FishType type = m_matchedBlocks[0].m_fish.m_foodType;
-        Vector3 newPosition = Vector3.zero;
+        foreach (List<IceBlock> matchedBlocks in m_matchedBlockQueue)
         {
-            foreach (IceBlock block in m_matchedBlocks)
+
+
+            int insertIndex = m_iceBlocks.IndexOf(matchedBlocks[0]);
+            FishType type = matchedBlocks[0].m_fish.m_foodType;
+            Vector3 newPosition = Vector3.zero;
             {
-                newPosition += block.transform.position;
+                foreach (IceBlock block in matchedBlocks)
+                {
+                    newPosition += block.transform.position;
+                }
+                newPosition /= matchedBlocks.Count;
             }
-            newPosition /= m_matchedBlocks.Count;
+
+            foreach (IceBlock block in matchedBlocks)
+            {
+                DeleteBlock(block);
+            }
+
+
+
+//            GameObject combinedBlock = Instantiate(m_blockPrefab) as GameObject;
+//            combinedBlock.transform.SetParent(transform);
+//            combinedBlock.transform.position = newPosition;
+//
+//            IceBlock blockScript = combinedBlock.GetComponent<IceBlock>();
+//            blockScript.SetType(type);
+//            m_iceBlocks.Insert(insertIndex, blockScript);
+
+
+            GameManager.GetInstance().m_specialEffectManager.PlayEffectAt(SpecialEffect.MatchedEffect, newPosition);
+
+            matchedBlocks.Clear();
+
         }
-        
-        foreach (IceBlock block in m_matchedBlocks)
-        {
-			DeleteBlock(block);
-        }
 
 
+        m_matchedBlockQueue.Clear();
 
-        GameObject combinedBlock = Instantiate(m_blockPrefab) as GameObject;
-        combinedBlock.transform.SetParent(transform);
-        combinedBlock.transform.position = newPosition;
-
-        IceBlock blockScript = combinedBlock.GetComponent<IceBlock>();
-        blockScript.SetType(type);
-        m_iceBlocks.Insert(insertIndex,blockScript);
-
-
-        GameManager.GetInstance().m_specialEffectManager.PlayEffectAt(SpecialEffect.MatchedEffect,newPosition);
-
-        m_matchedBlocks.Clear();
-
+		UpdateMatchedBlocks();
 
 
     }
@@ -327,7 +367,8 @@ public class IceBlockManager : MonoBehaviour
 		if(m_iceBlocks.Count > 0)
 		{
 			Destroy(m_iceBlocks[0].gameObject);
-			Clear();
+            m_iceBlocks.Clear();
+
 
 		}
 

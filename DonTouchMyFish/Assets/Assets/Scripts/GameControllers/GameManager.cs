@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
 
 	public void RestartGame()
 	{
+
 		score = 0;
 		OneRoundTime = 60.0f;
 		m_UIManager.SetTime(OneRoundTime);

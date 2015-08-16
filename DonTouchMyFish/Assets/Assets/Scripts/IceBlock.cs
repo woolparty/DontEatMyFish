@@ -10,8 +10,10 @@ public class IceBlock : MonoBehaviour
     [HideInInspector]
 	public Material[] blockMaterials;
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool m_isBottom = false;
+
+	public GameObject m_blockObject;
 
     private MeshRenderer renderer;
 
@@ -25,6 +27,11 @@ public class IceBlock : MonoBehaviour
     {
         return m_fish.m_foodType;
     }
+
+	void Update()
+	{
+
+	}
 
     public void CheckForDestroy()
     {
@@ -86,5 +93,17 @@ public class IceBlock : MonoBehaviour
 
         SetType((FishType)typeInt);
 
+	}
+	bool isFlashing = false;
+	public void Flash()
+	{
+		if(!isFlashing)
+			InvokeRepeating("FlashHelper",0,0.05f);
+		isFlashing = true;
+	}
+
+	private void FlashHelper()
+	{
+		m_blockObject.SetActive(!m_blockObject.activeSelf);
 	}
 }
