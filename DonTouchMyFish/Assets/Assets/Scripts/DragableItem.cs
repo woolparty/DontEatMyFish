@@ -35,7 +35,11 @@ public class DragableItem : MonoBehaviour {
     #region drag callbacks 
     void OnMouseDown()
 	{
-        m_isDragging = true;
+
+        if( GetComponent<IceBlock>().m_isMatched )
+            m_isDragging = false;
+        else
+            m_isDragging = true;
 
         m_dist = Camera.main.WorldToScreenPoint(transform.position);
         m_posX = Input.mousePosition.x - m_dist.x;
@@ -45,6 +49,10 @@ public class DragableItem : MonoBehaviour {
 
 	void OnMouseDrag()
 	{
+	    if (!m_isDragging)
+	        return;
+
+
         Vector3 curPos = new Vector3(Input.mousePosition.x - m_posX, m_dist.y, m_dist.z);
 		Vector3 worldPos = Camera.main.ScreenToWorldPoint(curPos);
 

@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\GameControllers\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameControllers\IceBlockManager.cs" />
      <Compile Include="Assets\Scripts\GameControllers\LevelController.cs" />
+     <Compile Include="Assets\Scripts\GameControllers\SpecialEffectManager.cs" />
      <Compile Include="Assets\Scripts\GameControllers\StartSceneManager.cs" />
      <Compile Include="Assets\Scripts\IceBlock.cs" />
      <Compile Include="Assets\Scripts\Monster.cs" />

@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
 	}
 	#endregion
 
-	GameStatus state = GameStatus.Begin;
+	public GameStatus state = GameStatus.Begin;
 	public LevelController m_LevelController;
 	public UIManager m_UIManager;
 	public IceBlockManager m_IceBlockManager;
+    public SpecialEffectManager m_specialEffectManager;
 	int score = 0;
 	public UnityEngine.UI.Text scoreText;
 	float OneRoundTime = 60.0f;

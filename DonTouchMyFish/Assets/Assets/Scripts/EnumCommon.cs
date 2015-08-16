@@ -2,15 +2,22 @@
 using System.Collections;
 
 public enum FishType{
-	RedFish,
+	RedFish = 0,
 	GreenFish,
-	BlueFish,
+	BlueFish = 2,
     RedFishBig,
     GreenFishBig,
-    BlueFishBig,
-    None
+    BlueFishBig = 5,
+    None = 6
 }
+public enum SpecialEffect
+{
+    MatchedEffect = 0,
+    CrashedEffect = 1,
+    Default
 
+
+}
 public enum GameStatus
 {
 	Begin,

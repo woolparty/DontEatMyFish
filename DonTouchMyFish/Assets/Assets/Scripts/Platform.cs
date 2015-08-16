@@ -19,6 +19,15 @@ public class Platform : MonoBehaviour {
 
         if (!iceBlockScript.m_isBottom)
         {
+
+			Destroy(iceBlockScript.gameObject);
+
+			foreach (ContactPoint contact in collision.contacts)
+			{
+				GameManager.GetInstance().m_specialEffectManager.PlayEffectAt(SpecialEffect.CrashedEffect,contact.point);
+			}
+
+			GameManager.GetInstance().m_IceBlockManager.DestroyLastFloor();
             GameManager.GetInstance().GameOver();
 
         }

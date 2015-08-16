@@ -51,7 +51,7 @@ public class LevelController : MonoBehaviour {
 
 	    IceBlockManager iceBlockManager = GameManager.GetInstance().m_IceBlockManager;
         iceBlockManager.AddBlock(blockScript);
-        iceBlockManager.CheckForMatch();
+        //iceBlockManager.CheckForMatch();
         
 
 
