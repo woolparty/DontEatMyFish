@@ -25,13 +25,12 @@ public class LevelController : MonoBehaviour {
 				GameManager.GetInstance().m_IceBlockManager.DropBlock();
 			}
 			dropTime = Time.time;
-			Debug.Log("Drop"+ Time.time);
 		}
 	}
 
 	public void PlayGame()
 	{
-		GameManager.GetInstance().m_IceBlockManager.InitBlocks(10, FishType.RedFish, FishType.GreenFish);
+		GameManager.GetInstance().m_IceBlockManager.InitBlocks(10, FishType.RedFish, FishType.BlueFish);
 		//GameManager.GetInstance().m_IceBlockManager.DropBlock(IceBlockManager.GetRandomFishType());
 		dropTime = Time.time;
 		isGamePlayed = true;
@@ -48,25 +47,6 @@ public class LevelController : MonoBehaviour {
 		dropTime = Time.time;
 		isGamePlayed = true;
 	}
-
-    //public void DropBlock()
-    //{
-    //    GameObject block = Instantiate(blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
-    //    block.transform.SetParent(IceBlocks);
-
-    //    IceBlock blockScript = block.GetComponent<IceBlock>();
-    //    blockScript.SetRandomType();
-
-    //    IceBlockManager iceBlockManager = GameManager.GetInstance().m_IceBlockManager;
-    //    iceBlockManager.AddBlock(blockScript);
-    //    //iceBlockManager.CheckForMatch();
-        
-
-
-    //    GameManager.GetInstance().m_IceBlockManager.Clear();
-    //    PlayGame();
-
-    //}
 
 	public void OnGameOver()
 	{
