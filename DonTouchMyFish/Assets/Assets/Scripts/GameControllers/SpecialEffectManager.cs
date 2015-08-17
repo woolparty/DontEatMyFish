@@ -27,7 +27,7 @@ public class SpecialEffectManager : MonoBehaviour
                 break;
         }
         effect.transform.parent = m_Transform;
-        effect.transform.position = i_position;
+        effect.transform.localPosition = i_position;
 
 
         Destroy(effect,3);

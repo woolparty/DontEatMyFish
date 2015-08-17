@@ -25,7 +25,7 @@ public class LevelController : MonoBehaviour {
 				GameManager.GetInstance().m_IceBlockManager.DropBlock();
 			}
 			dropTime = Time.time;
-			Debug.Log("Drop"+ Time.time);
+
 		}
 	}
 
