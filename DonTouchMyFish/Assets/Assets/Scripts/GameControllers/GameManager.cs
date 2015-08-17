@@ -96,6 +96,6 @@ public class GameManager : MonoBehaviour
 		state = GameStatus.End;
 		m_LevelController.OnGameOver();
 		m_UIManager.OnGameOver();
-
+		m_UIManager.gameOverPanel.SetFinalScore(score);
 	}
 }

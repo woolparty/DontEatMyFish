@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameOverPanel : MonoBehaviour {
-
+	public UnityEngine.UI.Text finalScore;
 	// Use this for initialization
 	void Start () {
 	
@@ -12,6 +12,7 @@ public class GameOverPanel : MonoBehaviour {
 	void Update () {
 	
 	}
+	
 	public void Show()
 	{
 		GetComponent<CanvasGroup>().alpha = 1;
@@ -28,5 +29,10 @@ public class GameOverPanel : MonoBehaviour {
 		GetComponent<CanvasGroup>().blocksRaycasts = false;
 
 		this.gameObject.SetActive(false);
+	}
+
+	public void SetFinalScore(int score)
+	{
+		finalScore.text = "最终得分： " + score;
 	}
 }

@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour {
 	public UnityEngine.UI.Text scoreText;
 	public UnityEngine.UI.Text timeText;
 	public InGamePanel InGamePanel;
-	public GameOverPanel GameOverPanel;
+	public GameOverPanel gameOverPanel;
 
 	// Use this for initialization
 	void Start () {
@@ -21,19 +21,19 @@ public class UIManager : MonoBehaviour {
 	public void OnGameStart()
 	{
 		InGamePanel.Hide();
-		GameOverPanel.Hide();
+		gameOverPanel.Hide();
 	}
 
 	public void OnGamePlay()
 	{
 		InGamePanel.Show();
-		GameOverPanel.Hide();
+		gameOverPanel.Hide();
 	}
 
 	public void OnGameOver()
 	{
 		InGamePanel.Hide();
-		GameOverPanel.Show();
+		gameOverPanel.Show();
 	}
 
 

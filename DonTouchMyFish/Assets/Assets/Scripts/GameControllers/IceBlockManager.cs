@@ -233,11 +233,11 @@ public class IceBlockManager : MonoBehaviour
 		FishType type = GetRandomFishType();
 		if(lastBlockType == lastlastBlockType)
 		{
-			if (type == FishType.RedFish)
+			if (lastBlockType == FishType.RedFish)
 				type = GetOneOfTwoFishType(FishType.GreenFish, FishType.BlueFish);
-			if (type == FishType.GreenFish)
+			if (lastBlockType == FishType.GreenFish)
 				type = GetOneOfTwoFishType(FishType.RedFish, FishType.BlueFish);
-			if (type == FishType.BlueFish)
+			if (lastBlockType == FishType.BlueFish)
 				type = GetOneOfTwoFishType(FishType.GreenFish, FishType.RedFish);
 		}
 
