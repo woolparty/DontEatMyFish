@@ -45,17 +45,32 @@ public class IceBlockManager : MonoBehaviour
 
 	}
 
+	public void AdjustPositions()
+	{
+
+		foreach(IceBlock block in m_iceBlocks)
+		{
+
+
+		}
+
+	}
+
 	public int GetBlockCount()
 	{
 		return m_iceBlocks.Count;
 	}
 
+	float offset = 0.0f;
     public void AddBlock(IceBlock i_iceblock)
     {
         m_iceBlocks.Add(i_iceblock);
         i_iceblock.transform.parent = transform;
 
 		UpdateMatchedBlocks();
+
+		i_iceblock.transform.position += new Vector3(0,0,offset);
+		offset -= 0.0001f;
     }
 
 	public void DeleteBlock(IceBlock i_iceblock)
@@ -301,7 +316,7 @@ public class IceBlockManager : MonoBehaviour
 		if(m_matchedBlockQueue.Count > 0)
 		{
 			if(m_Counter <= 0.0f)
-				m_Counter = 2.0f;
+				m_Counter = 0.5f;
 		}
 
     }
