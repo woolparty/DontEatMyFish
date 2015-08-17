@@ -165,6 +165,7 @@ Transform:
   - {fileID: 842865955}
   - {fileID: 196488547}
   - {fileID: 61386372}
+  - {fileID: 1813959079}
   - {fileID: 2011029506}
   - {fileID: 1820719611}
   - {fileID: 133717035}
@@ -338,7 +339,7 @@ Prefab:
     - target: {fileID: 11404708, guid: 3edd4e75bf4d50845a63e497fd34c584, type: 2}
       propertyPath: IceBlocks
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1813959079}
     - target: {fileID: 11404708, guid: 3edd4e75bf4d50845a63e497fd34c584, type: 2}
       propertyPath: blockDropPos
       value: 
@@ -535,7 +536,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 57416035}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!114 &133717036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2871,7 +2872,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 449538, guid: 196d22938044aaf4081a8ad962b18914, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11449538, guid: 196d22938044aaf4081a8ad962b18914, type: 2}
       propertyPath: blockDropPos
@@ -3246,7 +3247,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 57416035}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!1 &1127066964
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,6 +5491,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1976013678}
   m_GameObject: {fileID: 1800411075}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1813959078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1813959079}
+  m_Layer: 0
+  m_Name: IceBlocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1813959079
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813959078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 57416035}
+  m_RootOrder: 7
 --- !u!1 &1820719610
 GameObject:
   m_ObjectHideFlags: 0
@@ -5516,7 +5544,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 57416035}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &1832181216
 GameObject:
   m_ObjectHideFlags: 0
@@ -5581,7 +5609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropInterval: .600000024
   dropTime: -1
-  IceBlocks: {fileID: 0}
+  IceBlocks: {fileID: 1813959079}
 --- !u!114 &1832181220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6430,7 +6458,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 57416035}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &2043714850
 GameObject:
   m_ObjectHideFlags: 0
