@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
 	public UnityEngine.UI.Text scoreText;
 	float OneRoundTime = 60.0f;
 
+	public GameObject PenguinLeft;
+	public GameObject PenguinRight;
+
 	void Awake()
 	{
 		instance = this;

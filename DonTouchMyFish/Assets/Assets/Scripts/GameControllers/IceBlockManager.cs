@@ -66,7 +66,6 @@ public class IceBlockManager : MonoBehaviour
         if (m_iceBlocks.Count >= 1)
             m_iceBlocks[0].m_isBottom = true;
 
-
 		UpdateMatchedBlocks();
 	}
 	
