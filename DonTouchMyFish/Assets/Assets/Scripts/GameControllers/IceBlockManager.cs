@@ -96,8 +96,6 @@ public class IceBlockManager : MonoBehaviour
 
 	public void InitBlocks(int count, FishType type1, FishType type2)
 	{
-
-
 		//Init first two blocks
 		float random = Random.Range(0, 0.999f);
 		if (random > 0.5f)
@@ -206,7 +204,9 @@ public class IceBlockManager : MonoBehaviour
 
 	public bool DropInitBlock()
 	{
-		if(InitFishList.Count > 0)
+		DropBlocks( InitFishList);
+		return true;
+		/*if(InitFishList.Count > 0)
 		{
 			GameObject block = Instantiate(m_blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
 			block.transform.SetParent(transform);
@@ -224,8 +224,32 @@ public class IceBlockManager : MonoBehaviour
 		else
 		{
 			return true;
-		}
+		}*/
 		
+	}
+
+	public void DropBlocks(List<FishType> typeList)
+	{
+		if(InitFishList.Count == 0)
+		{
+			return;
+		}
+
+		float deltaY = 2f;
+		for(int i = 0; i< typeList.Count; i++)
+		{
+			GameObject block = Instantiate(m_blockPrefab, new Vector3(blockDropPos.position.x, blockDropPos.position.y + i * deltaY, blockDropPos.position.z), blockDropPos.rotation) as GameObject;
+			block.transform.SetParent(transform);
+			IceBlock blockScript = block.GetComponent<IceBlock>();
+			blockScript.SetType(typeList[i]);
+			AddBlock(blockScript);
+			lastlastBlockType = lastBlockType;
+			lastBlockType = blockScript.GetFishType();
+		}
+		if (m_iceBlocks.Count >= 1)
+			m_iceBlocks[0].m_isBottom = true;
+
+		InitFishList.Clear();
 	}
 
 	public void DropBlock()
