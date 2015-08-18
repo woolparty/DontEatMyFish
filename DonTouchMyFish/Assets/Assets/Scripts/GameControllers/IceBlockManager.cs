@@ -5,6 +5,8 @@ public class IceBlockManager : MonoBehaviour
 {
 
     private List<IceBlock> m_iceBlocks;
+	private List<List<IceBlock>> m_iceBlockGroup;
+
     private List<List<IceBlock>> m_matchedBlockQueue;
     private float m_Counter;
 
@@ -23,18 +25,146 @@ public class IceBlockManager : MonoBehaviour
 	    m_Counter = -1f;
         m_matchedBlockQueue = new List<List<IceBlock>>();
 	    m_iceBlocks = new List<IceBlock>();
+
+		m_iceBlockGroup = new List<List<IceBlock>>();
 	}
-	
+	private const float minDistanceX = 2.2f;
+	private const float minDistanceY = 2.1f;
+	private void FindBlockGroups()
+	{
+		if(m_iceBlocks.Count == 0)
+			return;
+
+		m_iceBlockGroup = new List<List<IceBlock>>();
+		List<IceBlock> group = new List<IceBlock>();
+		group.Add(m_iceBlocks[0]);
+
+		for(int i = 1; i < m_iceBlocks.Count ; i++)
+		{
+			if( !IsConnected(m_iceBlocks[i-1],m_iceBlocks[i]) )
+			{
+				m_iceBlockGroup.Add(group);
+				group = new List<IceBlock>();
+			}
+			group.Add(m_iceBlocks[i]);
+
+		}
+		m_iceBlockGroup.Add(group);
+	}
+	private bool IsConnected(IceBlock i_A,IceBlock i_B)
+	{
+		return ( Mathf.Abs(i_A.transform.position.y-i_B.transform.position.y) <= minDistanceY 
+		        && Mathf.Abs(i_A.transform.position.x-i_B.transform.position.x) <= minDistanceX );
+
+	}
+	private void CheckForMatchedByGroup()
+	{
+		foreach( List<IceBlock> list in m_iceBlockGroup )
+		{
+			CheckForMatch(list);
+		}
+	}
+	public void CheckForMatch(List<IceBlock> i_list)
+	{
+		FishType type = FishType.None;
+		List<IceBlock> temp = new List<IceBlock>();
+		for (int i = 0; i < i_list.Count; i++)
+		{
+			
+			if (i_list[i].m_isMatched)// || m_iceBlocks[i].rigidbody.velocity.magnitude > 0.5f)
+			{
+				type = FishType.None;
+			}
+			
+			if (type == i_list[i].GetFishType())
+			{
+				temp.Add(i_list[i]);
+			}
+			else
+			{
+				if (temp.Count >= 3)
+				{
+					
+					m_matchedBlockQueue.Add(temp);
+					foreach (IceBlock block in temp)
+					{
+						block.m_isMatched = true;
+						block.Flash();
+					}
+					
+				}
+				type = i_list[i].GetFishType();
+				
+				temp = new List<IceBlock>();
+				temp.Add(i_list[i]);
+			}
+		}
+		
+		if (temp.Count >= 3)
+		{
+			
+			m_matchedBlockQueue.Add(temp);
+			foreach (IceBlock block in temp)
+			{
+				block.m_isMatched = true;
+				block.Flash();
+			}
+		}
+		
+		
+		if(m_matchedBlockQueue.Count > 0)
+		{
+			if(m_Counter <= 0.0f)
+				m_Counter = 1f;
+		}
+		
+	}
+
+	private void AutoAligning()
+	{
+
+		float x = 0;
+		foreach( Transform trans in transform )
+		{
+			x += trans.position.x;
+		}
+		x /= transform.childCount;
+
+		float rotation = 0;
+		float newX = 0;
+		foreach( Transform trans in transform )
+		{
+			if( trans.rotation.eulerAngles.z < 30 || trans.rotation.eulerAngles.z > 330 )
+			{
+				newX = Mathf.Lerp(trans.position.x,x,0.05f);
+				trans.position = new Vector3(newX,trans.position.y,trans.position.z);
+			}
+
+		}
+
+	}
+	void ReCheckForMatchedGroup()
+	{
+
+	}
+
+	int lastCount = 0;
 	// Update is called once per frame
 	void Update ()
 	{
         if (m_iceBlocks.Count >= 1)
             m_iceBlocks[0].m_isBottom = true;
 
+		FindBlockGroups();
+		if( lastCount != m_iceBlockGroup.Count )
+			UpdateMatchedBlocks();
+		lastCount = m_iceBlockGroup.Count;
+
+		CheckForMatchedByGroup();
 
 	    if (m_Counter < 0)
 	        return;
-
+		AutoAligning();
 	    m_Counter -= Time.deltaTime;
 	    if (m_Counter <= 0.0f)
 	    {
@@ -45,16 +175,6 @@ public class IceBlockManager : MonoBehaviour
 
 	}
 
-	public void AdjustPositions()
-	{
-
-		foreach(IceBlock block in m_iceBlocks)
-		{
-
-
-		}
-
-	}
 
 	public int GetBlockCount()
 	{
@@ -67,7 +187,7 @@ public class IceBlockManager : MonoBehaviour
         m_iceBlocks.Add(i_iceblock);
         i_iceblock.transform.parent = transform;
 
-		UpdateMatchedBlocks();
+		//UpdateMatchedBlocks();
 
 		i_iceblock.transform.position += new Vector3(0,0,offset);
 		offset -= 0.0001f;
@@ -81,7 +201,7 @@ public class IceBlockManager : MonoBehaviour
         if (m_iceBlocks.Count >= 1)
             m_iceBlocks[0].m_isBottom = true;
 
-		UpdateMatchedBlocks();
+		//UpdateMatchedBlocks();
 	}
 	
 	public void Clear()
@@ -274,7 +394,7 @@ public class IceBlockManager : MonoBehaviour
 		blockScript.SetType(type);
 		//blockScript.SetRandomType();
 		AddBlock(blockScript);
-		CheckForMatch();
+		//CheckForMatch();
 	}
 
 	public void UpdateMatchedBlocks()
@@ -284,65 +404,10 @@ public class IceBlockManager : MonoBehaviour
 			iceBlock.m_isMatched = false;
 		}
 		m_matchedBlockQueue = new List<List<IceBlock>>();
-		CheckForMatch();
 
 		m_Counter = -1.0f;
 	}
 
-    public void CheckForMatch()
-    {
-        FishType type = FishType.None;
-        List<IceBlock> temp = new List<IceBlock>();
-        for (int i = 0; i < m_iceBlocks.Count; i++)
-        {
-
-			if (m_iceBlocks[i].m_isMatched)// || m_iceBlocks[i].rigidbody.velocity.magnitude > 0.5f)
-            {
-                type = FishType.None;
-            }
-
-            if (type == m_iceBlocks[i].GetFishType())
-            {
-                temp.Add(m_iceBlocks[i]);
-            }
-            else
-            {
-                if (temp.Count >= 3)
-                {
-                    
-					m_matchedBlockQueue.Add(temp);
-					foreach (IceBlock block in temp)
-					{
-						block.m_isMatched = true;
-						block.Flash();
-					}
-
-                }
-                type = m_iceBlocks[i].GetFishType();
-
-				temp = new List<IceBlock>();
-                temp.Add(m_iceBlocks[i]);
-            }
-        }
-
-        if (temp.Count >= 3)
-        {
-			m_matchedBlockQueue.Add(temp);
-			foreach (IceBlock block in temp)
-			{
-				block.m_isMatched = true;
-				block.Flash();
-			}
-        }
-        
-
-		if(m_matchedBlockQueue.Count > 0)
-		{
-			if(m_Counter <= 0.0f)
-				m_Counter = 0.5f;
-		}
-
-    }
 
     private void PlayMatchedEffect()
     {
@@ -369,8 +434,13 @@ public class IceBlockManager : MonoBehaviour
                 newPosition /= matchedBlocks.Count;
             }
 
+
+
             foreach (IceBlock block in matchedBlocks)
             {
+
+
+
                 DeleteBlock(block);
             }
 
