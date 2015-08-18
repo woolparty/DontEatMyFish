@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="E:\8-5New\ETC_Depot\age_of_cube\cube\CubeGame\Assets\CubeGamePlay\Scripts\UI\InputUI\GameController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameControllers\IceBlockManager.cs">
     <Files>
-      <File FileName="E:\8-5New\ETC_Depot\age_of_cube\cube\CubeGame\Assets\CubeGamePlay\Scripts\UI\FunctionButtonsUI\PlayButton.cs" Line="86" Column="28" />
-      <File FileName="E:\8-5New\ETC_Depot\age_of_cube\cube\CubeGame\Assets\CubeGamePlay\Scripts\UI\InputUI\GameController.cs" Line="296" Column="2" />
+      <File FileName="Assets\Scripts\IceBlock.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameControllers\IceBlockManager.cs" Line="130" Column="4" />
+      <File FileName="E:\8-5New\ETC_Depot\age_of_cube\cube\CubeGame\Assets\CubeGamePlay\Scripts\UI\FunctionButtonsUI\PlayButton.cs" Line="1" Column="1" />
+      <File FileName="E:\8-5New\ETC_Depot\age_of_cube\cube\CubeGame\Assets\CubeGamePlay\Scripts\UI\InputUI\GameController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

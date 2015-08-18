@@ -73,19 +73,6 @@ public class IceBlock : MonoBehaviour
 
 	}
 
-	public int counter = 0;
-	public void OnCollisionExit(Collision collision)
-	{
-		counter--;
-
-	}
-
-	public void OnCollisionEnter(Collision collision)
-	{
-		counter++;
-		if(counter >= 2)
-			GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
-	}
 
     public void SetRandomType()
 	{
