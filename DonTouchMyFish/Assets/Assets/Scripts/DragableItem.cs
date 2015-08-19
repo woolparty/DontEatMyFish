@@ -10,10 +10,12 @@ public class DragableItem : MonoBehaviour {
     private bool m_isDragging;
 
     public IceBlock m_iceblock;
+	public Camera m_BlockCamera;
 
 	void Start()
 	{
         m_isDragging = false;
+		m_BlockCamera = GameObject.Find("Camera").GetComponent<Camera>();
 	}
 
 
@@ -36,12 +38,12 @@ public class DragableItem : MonoBehaviour {
     void OnMouseDown()
 	{
 
-        if( GetComponent<IceBlock>().m_isMatched )
+		if( m_iceblock.m_isMatched )
             m_isDragging = false;
         else
             m_isDragging = true;
 
-        m_dist = Camera.main.WorldToScreenPoint(transform.position);
+		m_dist = m_BlockCamera.WorldToScreenPoint(transform.position);
         m_posX = Input.mousePosition.x - m_dist.x;
         m_posY = Input.mousePosition.y - m_dist.y;
 
@@ -49,15 +51,15 @@ public class DragableItem : MonoBehaviour {
 
 	void OnMouseDrag()
 	{
-	    if (!m_isDragging)
+		if (!m_isDragging || m_iceblock.m_isMatched)
 	        return;
 
 
         Vector3 curPos = new Vector3(Input.mousePosition.x - m_posX, m_dist.y, m_dist.z);
-		Vector3 worldPos = Camera.main.ScreenToWorldPoint(curPos);
+		Vector3 worldPos = m_BlockCamera.ScreenToWorldPoint(curPos);
 
 	    float diff = (worldPos - transform.position).x;
-        rigidbody.velocity = new Vector3(diff / Time.deltaTime, rigidbody.velocity.y, 0);
+        rigidbody.velocity = new Vector3(diff / Time.deltaTime * 1.2f, rigidbody.velocity.y, 0);
 	}
 
 	void OnMouseUp()

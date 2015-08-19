@@ -18,7 +18,7 @@ public class LevelController : MonoBehaviour {
 	void Update () {
 		if(isGamePlayed&&Time.time - dropTime > dropInterval)
 		{
-			bool hasDropedInitBlocks = GameManager.GetInstance().m_IceBlockManager.DropInitBlock();
+			bool hasDropedInitBlocks = GameManager.GetInstance().m_IceBlockManager.DropCachedBlock();
 			//bool hasDropedInitBlocks = true;
 			if (hasDropedInitBlocks  && GameManager.GetInstance().m_IceBlockManager.GetBlockCount() < 10)
 			{
@@ -39,7 +39,7 @@ public class LevelController : MonoBehaviour {
 
 	public void RestartLevel()
 	{
-
+		GameManager.GetInstance().m_IceBlockManager.InitBlocks(10, FishType.RedFish, FishType.GreenFish);
 		for (int i = 0; i < IceBlocks.childCount; i++)
 		{
 			Destroy(IceBlocks.GetChild(i).gameObject);

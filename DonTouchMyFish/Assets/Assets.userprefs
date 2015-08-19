@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameControllers\IceBlockManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DragableItem.cs">
     <Files>
+      <File FileName="Assets\Scripts\DragableItem.cs" Line="11" Column="2" />
+      <File FileName="Assets\Scripts\GameControllers\IceBlockManager.cs" Line="98" Column="33" />
       <File FileName="Assets\Scripts\IceBlock.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameControllers\IceBlockManager.cs" Line="130" Column="4" />
       <File FileName="E:\8-5New\ETC_Depot\age_of_cube\cube\CubeGame\Assets\CubeGamePlay\Scripts\UI\FunctionButtonsUI\PlayButton.cs" Line="1" Column="1" />
       <File FileName="E:\8-5New\ETC_Depot\age_of_cube\cube\CubeGame\Assets\CubeGamePlay\Scripts\UI\InputUI\GameController.cs" Line="1" Column="1" />
     </Files>

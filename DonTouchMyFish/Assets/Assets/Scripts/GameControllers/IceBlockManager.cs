@@ -115,7 +115,7 @@ public class IceBlockManager : MonoBehaviour
 		if(m_matchedBlockQueue.Count > 0)
 		{
 			if(m_Counter <= 0.0f)
-				m_Counter = 1f;
+				m_Counter = 0.3f;
 		}
 		
 	}
@@ -223,14 +223,12 @@ public class IceBlockManager : MonoBehaviour
 			//DropBlock(type1);
 			InitFishList.Add(type1);
 			lastlastBlockType = type1;
-			Debug.Log("Drop: " + type1);
 		}
 		else
 		{
 			//DropBlock(type2);
 			InitFishList.Add(type2);
 			lastlastBlockType = type2;
-			Debug.Log("Drop: " + type2);
 		}
 
 		random = Random.Range(0, 0.999f);
@@ -239,14 +237,12 @@ public class IceBlockManager : MonoBehaviour
 			//DropBlock(type1);
 			InitFishList.Add(type1);
 			lastBlockType = type1;
-			Debug.Log("Drop: " + type1);
 		}
 		else
 		{
 			//DropBlock(type2);
 			InitFishList.Add(type2);
 			lastBlockType = type2;
-			Debug.Log("Drop: " + type2);
 		}
 
 		//Init remain blocks
@@ -259,14 +255,12 @@ public class IceBlockManager : MonoBehaviour
 					//DropBlock(type2);
 					InitFishList.Add(type2);
 					lastBlockType = type2;
-					Debug.Log("Drop: " + type2);
 				}
 				else
 				{
 					//DropBlock(type1);
 					InitFishList.Add(type1);
 					lastBlockType = type1;
-					Debug.Log("Drop: " + type1);
 				}
 			}
 			else
@@ -278,7 +272,6 @@ public class IceBlockManager : MonoBehaviour
 					InitFishList.Add(type1);
 					lastlastBlockType = lastBlockType;
 					lastBlockType = type1;
-					Debug.Log("Drop: " + type1);
 				}
 				else
 				{
@@ -286,7 +279,6 @@ public class IceBlockManager : MonoBehaviour
 					InitFishList.Add(type2);
 					lastlastBlockType = lastBlockType;
 					lastBlockType = type2;
-					Debug.Log("Drop: " + type2);
 				}
 			}
 		}
@@ -322,7 +314,7 @@ public class IceBlockManager : MonoBehaviour
 		return 0;
 	}
 
-	public bool DropInitBlock()
+	public bool DropCachedBlock()
 	{
 		DropBlocks( InitFishList);
 		return true;
@@ -355,10 +347,16 @@ public class IceBlockManager : MonoBehaviour
 			return;
 		}
 
-		float deltaY = 2f;
+		float deltaY = 3f;
+		GameObject block = new GameObject();
 		for(int i = 0; i< typeList.Count; i++)
 		{
-			GameObject block = Instantiate(m_blockPrefab, new Vector3(blockDropPos.position.x, blockDropPos.position.y + i * deltaY, blockDropPos.position.z), blockDropPos.rotation) as GameObject;
+			if(m_iceBlocks.Count > 0)
+				block = Instantiate(m_blockPrefab, new Vector3(m_iceBlocks[m_iceBlocks.Count - 1].transform.position.x, blockDropPos.position.y + i * deltaY, blockDropPos.position.z), blockDropPos.rotation) as GameObject;
+			else
+				block = Instantiate(m_blockPrefab, new Vector3(blockDropPos.transform.position.x, blockDropPos.position.y + i * deltaY, blockDropPos.position.z), blockDropPos.rotation) as GameObject;
+
+
 			block.transform.SetParent(transform);
 			IceBlock blockScript = block.GetComponent<IceBlock>();
 			blockScript.SetType(typeList[i]);
@@ -387,7 +385,12 @@ public class IceBlockManager : MonoBehaviour
 
 		lastlastBlockType = lastBlockType;
 		lastBlockType = type;
-		GameObject block = Instantiate(m_blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
+		GameObject block = new GameObject();
+		if (m_iceBlocks.Count > 0)
+			block = Instantiate(m_blockPrefab, new Vector3(m_iceBlocks[m_iceBlocks.Count - 1].transform.position.x, blockDropPos.position.y, blockDropPos.position.z), blockDropPos.rotation) as GameObject;
+		else
+			block = Instantiate(m_blockPrefab, new Vector3(blockDropPos.transform.position.x, blockDropPos.position.y, blockDropPos.position.z), blockDropPos.rotation) as GameObject;
+		//GameObject block = Instantiate(m_blockPrefab, blockDropPos.position, blockDropPos.rotation) as GameObject;
 		block.transform.SetParent(transform);
 
 		IceBlock blockScript = block.GetComponent<IceBlock>();
@@ -434,16 +437,17 @@ public class IceBlockManager : MonoBehaviour
                 newPosition /= matchedBlocks.Count;
             }
 
-
-
             foreach (IceBlock block in matchedBlocks)
             {
-
-
-
                 DeleteBlock(block);
             }
+			FishType firstType = FishType.RedFish;
+			FishType secondType = FishType.GreenFish;
 
+			RankFishType(m_iceBlocks, out firstType, out secondType);
+
+			GameManager.GetInstance().m_IceBlockManager.InitBlocks(matchedBlocks.Count, firstType, secondType);
+			Vector3 pos = Vector3.zero;
 
 
 //            GameObject combinedBlock = Instantiate(m_blockPrefab) as GameObject;
@@ -468,6 +472,67 @@ public class IceBlockManager : MonoBehaviour
 
 
     }
+
+	void RankFishType(List<IceBlock> iceblocks, out FishType RankFirstType, out FishType RankSecondType)
+	{
+		int RedCount = 0, GreenCount = 0, BlueCount = 0;
+		for (int i = 0; i < iceblocks.Count; i++)
+		{
+			switch (iceblocks[i].GetFishType())
+			{
+				case FishType.RedFish:
+					++RedCount;
+					break;
+				case FishType.GreenFish:
+					++GreenCount;
+					break;
+				case FishType.BlueFish:
+					++BlueCount;
+					break;
+			}
+		}
+
+
+		if(RedCount>=GreenCount)
+		{
+			if(GreenCount>=BlueCount)
+			{
+				RankFirstType = FishType.RedFish;
+				RankSecondType = FishType.GreenFish;
+			}else
+			{
+				if (RedCount >= BlueCount)
+				{
+					RankFirstType = FishType.RedFish;
+					RankSecondType = FishType.BlueFish;
+				}
+				else
+				{
+					RankFirstType = FishType.BlueFish;
+					RankSecondType = FishType.RedFish;
+				}
+			}
+		}
+		else
+		{
+			if (GreenCount >= BlueCount)
+			{
+				RankFirstType = FishType.GreenFish;
+				if(BlueCount >= RedCount)
+					RankSecondType = FishType.BlueFish;
+				else
+				{
+					RankSecondType = FishType.RedFish;
+				}
+			}
+			else
+			{
+				RankFirstType = FishType.BlueFish;
+				RankSecondType = FishType.GreenFish;
+			}
+		}
+	}
+
 
 	// This is called when the game is over
     public void DestroyLastFloor()

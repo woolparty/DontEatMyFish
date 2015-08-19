@@ -36,7 +36,7 @@ public class IceBlock : MonoBehaviour
     public void CheckForDestroy()
     {
         Vector3 pos = transform.position;
-        if (!m_isMatched&&(pos.x <= -7f || pos.x > 5f))
+        if (!m_isMatched&&(pos.x <= -5f || pos.x > 5f))
         {
             GetEaten();
         }
