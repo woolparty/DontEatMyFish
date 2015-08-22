@@ -7,7 +7,7 @@ public class IceBlock : MonoBehaviour
     public Fish m_fish;
     public bool m_isMatched = false;
 
-    [HideInInspector]
+    //[HideInInspector]
 	public Material[] blockMaterials;
 
     [HideInInspector]
@@ -36,21 +36,23 @@ public class IceBlock : MonoBehaviour
     public void CheckForDestroy()
     {
         Vector3 pos = transform.position;
-        if (!m_isMatched&&(pos.x <= -5f || pos.x > 5f))
-        {
-            GetEaten();
-        }
+		if( !m_isMatched && pos.x <= -5f )
+			GetEaten(true);
+		if( !m_isMatched && pos.x >=  5f )
+			GetEaten(false);
+
     }
 
-    public void GetEaten()
+    public void GetEaten(bool i_isLeft)
     {
         m_fish.Effect();
-        GameManager.GetInstance().m_IceBlockManager.DeleteBlock(this);
-        //GameManager.GetInstance().m_IceBlockManager.CheckForMatch();
-    }
-
-
-    public void SetType(FishType i_type)
+		GameManager gm =  GameManager.GetInstance();
+		gm.m_IceBlockManager.DeleteBlock(this);
+		gm.m_PenguinManager.FeedPanguin(i_isLeft,m_fish.m_foodType);
+	}
+	
+	
+	public void SetType(FishType i_type)
     {
         switch (i_type)
         {
@@ -69,8 +71,23 @@ public class IceBlock : MonoBehaviour
 				m_fish = new BlueFish();
                 m_fish.Init(FishType.BlueFish);
 				break;
+			case FishType.CopperFish:
+				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[3];
+				m_fish = new CopperFish();
+				m_fish.Init(FishType.CopperFish);
+				break;
+			case FishType.SilverFish:
+				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[4];
+				m_fish = new SilverFish();
+				m_fish.Init(FishType.SilverFish);
+				break;
+			case FishType.GoldFish:
+				GetComponentInChildren<MeshRenderer>().sharedMaterial = blockMaterials[5];
+				m_fish = new GoldFish();
+				m_fish.Init(FishType.GoldFish);
+				break;
 		}
-
+		
 	}
 
 

@@ -5,9 +5,9 @@ public enum FishType{
 	RedFish = 0,
 	GreenFish,
 	BlueFish = 2,
-    RedFishBig,
-    GreenFishBig,
-    BlueFishBig = 5,
+	CopperFish = 3,
+	SilverFish = 4,
+	GoldFish = 5,
     None = 6
 }
 public enum SpecialEffect
@@ -25,4 +25,11 @@ public enum GameStatus
 	End
 }
 
+public enum PenguinType
+{
+	Gray,
+	Blue,
+	Red,
+	Yellow
 
+}

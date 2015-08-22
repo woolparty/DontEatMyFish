@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 	public UIManager m_UIManager;
 	public IceBlockManager m_IceBlockManager;
     public SpecialEffectManager m_specialEffectManager;
+	public PenguinManager m_PenguinManager;
+
 	int score = 0;
 	public UnityEngine.UI.Text scoreText;
 	float OneRoundTime = 60.0f;

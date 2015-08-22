@@ -57,12 +57,17 @@
      <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
      <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_AutodestructWhenNoChildren.cs" />
      <Compile Include="Assets\Effects\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
+     <Compile Include="Assets\PenguinController.cs" />
+     <Compile Include="Assets\PenguinManager.cs" />
      <Compile Include="Assets\Scripts\DragableItem.cs" />
      <Compile Include="Assets\Scripts\EnumCommon.cs" />
      <Compile Include="Assets\Scripts\Fish\BlueFish.cs" />
+     <Compile Include="Assets\Scripts\Fish\CopperFish.cs" />
      <Compile Include="Assets\Scripts\Fish\Fish.cs" />
+     <Compile Include="Assets\Scripts\Fish\GoldFish.cs" />
      <Compile Include="Assets\Scripts\Fish\GreenFish.cs" />
      <Compile Include="Assets\Scripts\Fish\RedFish.cs" />
+     <Compile Include="Assets\Scripts\Fish\SilverFish.cs" />
      <Compile Include="Assets\Scripts\GameControllers\Floating.cs" />
      <Compile Include="Assets\Scripts\GameControllers\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameControllers\IceBlockManager.cs" />
